@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Study Planner, Focus Timer & Routine Tracker for Android</title>
+  <meta name="description" content="A clean, local-first study planner, deep focus timer, and daily routine tracker for Android. Developed by Reza Ghazizadeh." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="app_icon.png" />
+
+  <!-- Typography: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            canvas: '#090D10',
+            surface: '#0E1318',
+            subtle: 'rgba(255, 255, 255, 0.08)',
+            'subtle-hover': 'rgba(255, 255, 255, 0.12)',
+            nexus: {
+              DEFAULT: '#00D2D3',
+              hover: '#14B8A6',
+              soft: 'rgba(0, 210, 211, 0.08)',
+              border: 'rgba(0, 210, 211, 0.25)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #090D10;
+      color: #E2E8F0;
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+      -webkit-font-smoothing: antialiased;
+    }
+    .top-glow {
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 210, 211, 0.09), transparent);
+    }
+  </style>
+</head>
+<body class="bg-canvas text-zinc-300 font-sans min-h-screen flex flex-col relative selection:bg-teal-500/20 selection:text-teal-200">
+
+  <!-- Subtle Ambient Top Light -->
+  <div class="absolute inset-x-0 top-0 h-[480px] top-glow pointer-events-none"></div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-canvas/80 border-b border-subtle">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="app_icon.png" alt="Nexus Logo" class="w-8 h-8 rounded-lg border border-subtle transition-transform group-hover:scale-105" />
+        <span class="text-white font-semibold text-sm tracking-tight">Nexus</span>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-medium text-zinc-400">
+        <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <a href="#overview" class="hover:text-white transition-colors">Overview</a>
+        <a href="#installation" class="hover:text-white transition-colors">Installation</a>
+        <a href="https://github.com/rezagh-dev/Nexus" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5">
+          <span>GitHub</span>
+          <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rezagh-dev/Nexus/releases/latest/download/Nexus_v1.0.0.apk" 
+           class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs transition-colors shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span>Download APK</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative pt-24 pb-20 md:pt-32 md:pb-28">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      
+      <!-- App Icon & Release Tag -->
+      <div class="flex flex-col items-center mb-8">
+        <img src="app_icon.png" alt="Nexus App Icon" class="w-20 h-20 rounded-2xl shadow-xl border border-subtle mb-5" />
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-surface border border-subtle">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
+          Nexus v1.0.0 for Android
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6">
+        Plan your studies.<br class="hidden sm:block" /> Master your focus.
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-10">
+        A quiet, local-first Android study workspace combining intelligent scheduling, an unyielding lock-screen focus timer, subject analytics, and daily bio-routines.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <a href="https://github.com/rezagh-dev/Nexus/releases/latest/download/Nexus_v1.0.0.apk" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-nexus hover:bg-nexus-hover text-zinc-950 font-semibold text-sm transition-all shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span>Download APK (v1.0.0)</span>
+        </a>
+
+        <a href="https://github.com/rezagh-dev/Nexus" target="_blank" rel="noopener noreferrer" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface hover:bg-zinc-900 text-zinc-300 hover:text-white border border-subtle text-sm font-medium transition-colors">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>View on GitHub</span>
+        </a>
+      </div>
+
+      <p class="text-xs text-zinc-500 mt-4 font-mono">
+        Android 8.0+ • ~28 MB • Completely free & open-source
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ================= 6-CARD FEATURE GRID ================= -->
+  <section id="features" class="py-20 border-t border-subtle">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="mb-14">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
+          Engineered for cognitive endurance.
+        </h2>
+        <p class="text-sm text-zinc-400">
+          Essential tools designed to keep serious learners focused without algorithmic distractions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- Feature 1: Study Planner -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Daily Study Planner</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Schedule study blocks by subject, track daily hours against goals, and switch seamlessly between Gregorian and Jalali calendars.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2: Focus & Lock-Screen Timer -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Focus & Lock-Screen Timer</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Reliable countdown and stopwatch running in the background, complete with a full-screen lock-screen alarm overlay with slide-to-stop.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3: Subject Analytics -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Subject Analytics</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Clear visual distributions of daily and weekly study durations per subject, tracking exact hours and minutes spent in deep work.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4: Bio-Routine Tracker -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Bio-Routine Tracker</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Log daily sleep schedules, track essential supplements or medications, and monitor meal plans to sustain cognitive clarity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5: XP Progression -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">XP Progression System</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Earn 100 XP per verified study hour to climb across 8 progressive rank tiers from Bronze to Legend without gamified distraction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 6: Offline & JSON Backup -->
+        <div class="p-6 rounded-2xl bg-surface border border-subtle hover:border-subtle-hover transition-colors flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-canvas border border-subtle flex items-center justify-center text-zinc-300 mb-5">
+              <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">100% Offline & JSON Backup</h3>
+            <p class="text-xs leading-relaxed text-zinc-400">
+              Zero cloud accounts or analytics tracking. All database records live locally on your device with complete JSON export and import support.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= APP SPECIFICATIONS STRIP ================= -->
+  <section id="overview" class="py-20 border-t border-subtle bg-surface/40">
+    <div class="max-w-4xl mx-auto px-6">
+      
+      <div class="mb-10 text-center">
+        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white mb-1.5">
+          Technical Overview & Specifications
+        </h2>
+        <p class="text-xs text-zinc-400 font-mono">
+          Built for simplicity, speed, and privacy.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-subtle bg-surface overflow-hidden divide-y divide-subtle font-mono text-xs">
+        
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Current Version</span>
+          <span class="text-white font-medium">1.0.0 (Official Release)</span>
+        </div>
+
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Platform Compatibility</span>
+          <span class="text-white font-medium">Android 8.0+ (Oreo to Android 15)</span>
+        </div>
+
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Local Architecture</span>
+          <span class="text-white font-medium">100% Local SQLite & Hive Storage</span>
+        </div>
+
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Interface Themes</span>
+          <span class="text-white font-medium">Dark Mode & Light Mode</span>
+        </div>
+
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Supported Languages</span>
+          <span class="text-white font-medium">English & Persian (فارسی)</span>
+        </div>
+
+        <div class="flex items-center justify-between px-6 py-4">
+          <span class="text-zinc-400 font-sans">Calendar Systems</span>
+          <span class="text-white font-medium">Gregorian & Jalali (Solar Hijri)</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= INSTALLATION ================= -->
+  <section id="installation" class="py-20 border-t border-subtle">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      
+      <h2 class="text-2xl font-bold tracking-tight text-white mb-3">
+        Ready to take control of your study routine?
+      </h2>
+      <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto mb-8 leading-relaxed">
+        Nexus installs directly via APK without third-party store dependencies. Download the release binary and start scheduling your sessions in seconds.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="https://github.com/rezagh-dev/Nexus/releases/latest/download/Nexus_v1.0.0.apk" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-nexus hover:bg-nexus-hover text-zinc-950 font-semibold text-xs sm:text-sm transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span>Download Nexus APK (v1.0.0)</span>
+        </a>
+
+        <a href="https://github.com/rezagh-dev/Nexus/releases" target="_blank" rel="noopener noreferrer" 
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface hover:bg-zinc-900 text-zinc-300 hover:text-white border border-subtle text-xs sm:text-sm font-medium transition-colors">
+          <span>Release Notes</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MINIMAL FOOTER ================= -->
+  <footer class="mt-auto border-t border-subtle py-10 bg-canvas">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+      
+      <div class="flex items-center gap-2.5">
+        <img src="app_icon.png" alt="Nexus" class="w-5 h-5 rounded-md opacity-80" />
+        <span>Built by <a href="https://github.com/rezagh-dev" target="_blank" rel="noopener noreferrer" class="text-zinc-300 hover:text-white font-medium underline underline-offset-4 decoration-subtle transition-colors">Reza Ghazizadeh</a></span>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <a href="https://github.com/rezagh-dev/Nexus" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-300 transition-colors">GitHub Repository</a>
+        <a href="mailto:r.ghazizadeh14@gmail.com" class="hover:text-zinc-300 transition-colors">Contact Support</a>
+        <a href="https://github.com/rezagh-dev/Nexus/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-300 transition-colors">MIT License</a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
