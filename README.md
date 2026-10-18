@@ -72,5 +72,6 @@ Nexus is an all-in-one productivity workspace designed for professionals, develo
 Designed and developed by **Reza Ghazizadeh**.
 
 * **GitHub**: [@rezagh-dev](https://github.com/rezagh-dev)
+* **Telegram**: [@NexusStudyApp](https://t.me/NexusStudyApp)
 * **Email**: [r.ghazizadeh14@gmail.com](mailto:r.ghazizadeh14@gmail.com)
 * **Live Showcase**: [rezagh-dev.github.io/Nexus](https://rezagh-dev.github.io/Nexus/)
